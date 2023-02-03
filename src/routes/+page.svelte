@@ -1,6 +1,7 @@
 
 <script type="ts">
   import { onMount } from 'svelte';
+  import PriceChart from '../routes/_components/price-chart.svelte';
 
   // User Settings
   let currency = "USD";
@@ -16,6 +17,8 @@
   let priceToday: any;
   let percentageIncrease: any;
 
+  let historyData: any;
+  
   /* Test: Use <User Settings> and <Selected Wallet Data> with fetched <PriceHistory> */
 
   // Invoke this function when the component is mounted to the DOM
@@ -45,6 +48,22 @@
     let valueIncrease = balance * increase;
     percentageIncrease = valueIncrease / balance * 100;
 
+    // Prop Pass Data to child PriceChart export
+    // Init Array
+    let pricesData: Array<[string, string]> = priceHistory["prices"];
+    let times: string[] = [];
+    let amounts: string[] = [];
+
+    for (let [time, price] of pricesData) {
+      times.push(time);
+      amounts.push(price);
+    }
+    historyData = pricesData;
+
+    console.log("Times:", times);
+    console.log("Amounts:", amounts);
+    console.log("Prices:", pricesData);
+
   });
   
   // TODO: structure of the response data (real-world scenario, more specified)
@@ -60,3 +79,5 @@
   <p>{currency}: {priceToday}</p>
   <p>{percentageIncrease}</p>
 {/if}
+
+<PriceChart historyData={historyData}/>

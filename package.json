@@ -28,6 +28,7 @@
   },
   "type": "module",
   "dependencies": {
+    "anychart": "^8.11.0",
     "node-sass": "^8.0.0",
     "sass": "^1.58.0"
   }
