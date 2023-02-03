@@ -12,7 +12,7 @@
     // TODO: Import Tooltip
   </script>
 <!-- Top Bar UI Component-->
-<div class="sticky top-0 z-50 bg-zinc-900 p-8 border-b-1 border-zinc-600">
+<div class="sticky top-0 z-50 bg-zinc-900 p-8 border-b border-zinc-800">
   <div class="lg:flex lg:items-center lg:justify-between">
     <div class="min-w-0 flex-1">
       <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">

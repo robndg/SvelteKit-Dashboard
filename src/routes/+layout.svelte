@@ -3,7 +3,7 @@
   // Import _layout UI components
   import TopBar from "../routes/_layout/topbar.svelte"
 </script>
-<div class="min-h-full">
+<div class="min-h-screen bg-zinc-900">
   <TopBar/>
   <main class="flex-1 p-4">
     <!-- Column Layout -->
@@ -15,7 +15,7 @@
       </div>
 
       <!-- Content Right (Yield Page Slot)-->
-      <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8">
+      <div class="lg:col-span-2 lg:border-l lg:border-zinc-800 lg:pb-16 lg:pl-8">
         <slot />
 
       </div>
