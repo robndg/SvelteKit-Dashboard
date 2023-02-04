@@ -1,7 +1,7 @@
 
 <script type="ts">
   // Page
-  import Portfolio from './pages/portfolio.svelte';
+  import Portfolio from './pages/portfolio/portfolio.svelte';
   // userDefaults store: User settings
   import { userDefaults } from '.././userDefaults';
   // userBalances store: Wallet balances
@@ -24,5 +24,6 @@
 </script>
 
 <div class="h-96 lg:h-full">
+
   <Portfolio/>
 </div>
