@@ -20,7 +20,7 @@
     // Page Nav List Details [slug, title, icon, disabled, progress]
     let nav_list = [
         ['/', 'Portfolio', PresentationChartLine, false, false],
-        ['/market', 'Market', ChartBar, true, false],
+        ['/market', 'Market', ChartBar, false, false],
         ['/accounts', 'Accounts', ViewList, true, false],
         //['/discover', 'Discover', CheckCircle, true, false],
         ['/send', 'Send', ArrowUp, true, false],
