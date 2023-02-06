@@ -18,7 +18,7 @@
           </span>
           <p class="ml-3 truncate font-medium text-white">
             <span class="md:hidden">Demo release for SvelteKit dashboard!</span>
-            <span class="hidden md:inline">Big news! Excited to announce the demo of our SvelteKit Dashboard.</span>
+            <span class="hidden md:inline">Big news! Excited to announce the demo of v0.1 SvelteKit Dashboard.</span>
           </p>
         </div>
     

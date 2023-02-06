@@ -3,14 +3,14 @@
   import { onMount } from 'svelte';
   import { beforeUpdate, afterUpdate } from 'svelte';
   import { fade, scale } from "svelte/transition";
-  import { blurMode } from "../../_layout/topbar.svelte";
+  import { blurMode } from "../_layout/topbar.svelte";
   // Index Page, Portfolio
   import PriceChart from './_components/price-chart.svelte'
   
   // userDefaults store: User settings
-  import { userDefaults } from '../../../userDefaults';
+  import { userDefaults } from '../../userDefaults';
   // userBalances store: Wallet balances
-  import { userBalances } from '../../../userBalances.js';
+  import { userBalances } from '../../userBalances.js';
 
   let defaultCurrency: string;
 

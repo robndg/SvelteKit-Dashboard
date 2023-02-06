@@ -41,12 +41,12 @@
         </button>
       </div>
     </div>
-    <div class="mt-5 flex lg:mt-0 lg:ml-4">
+    <div class="flex ml-auto lg:ml-4">
       <span class="sm:ml-3 mr-3">
         <button type="button" class="inline-flex items-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-zinc-200 shadow-sm hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-700 focus:ring-offset-2">
           <!-- Heroicon name: mini/check -->
           <Icon src="{CheckCircle}" class="mr-1.5 h-5 w-5 flex-shrink-0 text-green-400" aria-hidden="true" />
-          Synchronized
+          <span class="hidden sm:block">Synchronized</span>
         </button>
       </span>
       <!-- Information Centre -->
@@ -59,7 +59,7 @@
         </button>
       </span>
       <!-- Toggle Descrete Mode -->
-      <span class="ml-3 hidden sm:block">
+      <span class="ml-3">
         <button type="button" class="inline-flex items-center rounded-md px-2 py-2 text-sm font-medium text-gray-300 rounded-full bg-zinc-900 p-1 text-zinc-200 hover:text-white hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-600 focus:ring-offset-2 focus:ring-offset-zinc-700"
         on:click={toggleBlur}>
           <!-- Heroicon name: Eye -->
@@ -75,7 +75,7 @@
         </button>
       </span>
       <!-- Settings -->
-      <span class="ml-3 hidden sm:block sm:ml-3">
+      <span class="ml-3 sm:ml-3">
         <button type="button" class="inline-flex items-center rounded-md px-2 py-2 text-sm font-medium text-gray-300 rounded-full bg-zinc-900 p-1 text-zinc-200 hover:text-white hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-600 focus:ring-offset-2 focus:ring-offset-zinc-700"
         on:click={toggleSettings}>
           <!-- Heroicon name: Cog -->

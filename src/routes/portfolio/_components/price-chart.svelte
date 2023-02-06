@@ -4,7 +4,7 @@
     import { beforeUpdate, afterUpdate } from 'svelte';
 
     // userBalances store: Wallet balances
-    import { userBalances } from '../../../../userBalances';
+    import { userBalances } from '../../../userBalances';
     
     let cryptoFull: string;
     let walletBalance: number;

@@ -17,15 +17,15 @@
     $: currentPath = $page.url.pathname;
     let activeNav = nav_list.find(item => item[0] === currentPath);
 
-$: {
-    activeNav = nav_list.find(item => item[0] === currentPath);
-    console.log(activeNav)
-   
-}
+    $: {
+        activeNav = nav_list.find(item => item[0] === currentPath);
+        console.log(activeNav)
+      
+    }
 </script>
 <nav aria-label="Breadcrumb">
     <ol role="list" class="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-2 mb-3">
-       <!-- TODO: Make breadcrumbs each -->
+       <!-- TODO: Make breadcrumbs each, for path more one dir one slash -->
 
             <li>
                 <div class="flex items-center">
@@ -36,7 +36,7 @@ $: {
                   </svg>
                 </div>
               </li>
-
+              
               <li class="text-sm">
                 <a href="{activeNav[0]}" aria-current="page" class="font-medium text-gray-500 hover:text-gray-600">{activeNav[1]}</a>
               </li>

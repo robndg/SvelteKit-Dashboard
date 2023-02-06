@@ -55,7 +55,7 @@
               <button type="button" class="rounded-md bg-zinc-500 text-zinc-800 hover:text-zinc-900 focus:outline-none focus:ring-2 focus:ring-white"
               on:click={() => closeSlide()}>
                 <span class="sr-only">Close panel</span>
-                <!-- Heroicon name: outline/x-mark -->
+                <!-- Heroicon name: ChevronRight -->
                 <Icon src="{ChevronRight}" class="h-8 w-8 flex-shrink-0" aria-hidden="true" />
               </button>
             </div>
