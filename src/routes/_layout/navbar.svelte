@@ -48,7 +48,7 @@
         Inactive: "bg-zinc-900 focus:bg-zinc-800 hover:bg-zinc-800 border-zinc-600 focus:border-indigo-500 text-zinc-400 hover:text-gray-100" 
         Disabled: "cursor-not-allowed"-->
       {#each menu_list as menu}
-      <a href="{menu.slug.toString()}" class="group relative border {$page.url.pathname == menu.slug ? 'bg-zinc-800 border-indigo-500 text-zinc-200' : 'bg-zinc-900 focus:bg-zinc-800 hover:bg-zinc-800 border-zinc-600 focus:border-indigo-500 text-zinc-400 hover:text-gray-100'} rounded-md flex items-center justify-center text-sm font-medium uppercase sm:flex-1 py-1 lg:py-3 px-4 {menu.disabled == true ? 'cursor-not-allowed' : ''}">
+      <a href="{menu.slug.toString()}" class="group relative border {$page.url.pathname == menu.slug ? 'bg-zinc-800 border-indigo-500 text-zinc-200' : 'bg-zinc-900 focus:bg-zinc-800 hover:bg-zinc-800 border-zinc-600 focus:border-indigo-500 text-zinc-300 hover:text-gray-100'} rounded-md flex items-center justify-center text-sm font-medium uppercase sm:flex-1 py-1 lg:py-3 px-4 {menu.disabled == true ? 'cursor-not-allowed' : ''}">
         <Icon src="{menu.icon}" class="absolute ml-0 sm:mx-auto lg:ml-3 flex-shrink-0 inset-0 h-full h:lg-5 w-10 lg:w-5 stroke-2 text-zinc-600 pointer-events-none" aria-hidden="true" />
         <span id="size-choice-{menu.index}-label" class="invisible lg:visible">{menu.title}</span> 
         {#if menu.progress}

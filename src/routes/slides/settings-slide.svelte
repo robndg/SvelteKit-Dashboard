@@ -9,8 +9,8 @@
       CheckCircle
     } from "svelte-hero-icons";
 
-    let open = true;
-    let editing = true;
+    let open = false;
+    let editing = false;
 
     let defaultCurrency = 'USD';
     $: selectedCur = defaultCurrency;
@@ -57,7 +57,7 @@ function updateCurrency(newCurrency) {
         </div>
         <div class="flex flex-1 items-center justify-center">
           <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-          <h1 class="bg-gray-900 text-white px-3 py-2 mt-2 rounded-md text-sm font-medium" >{userName}</h1>
+          <h1 class="bg-zinc-900 text-white px-3 py-2 mt-2 rounded-md text-sm font-medium" >{userName}</h1>
         </div>
         <div>
           <div class="mt-4 text-center sm:mt-3 sm:ml-4 sm:text-left">

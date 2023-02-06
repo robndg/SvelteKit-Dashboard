@@ -22,7 +22,7 @@
     }
 
     // Send Toggle show Settings Slide to component
-    export const showSettingsSlide = writable(true);
+    export const showSettingsSlide = writable(false);
 
     function toggleSettings() {
         showSettingsSlide.update(n => !n);

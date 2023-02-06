@@ -3,7 +3,8 @@
   // Import _layout UI components
   import TopBar from "./_layout/topbar.svelte"
   import NavBar from './_layout/navbar.svelte';
-
+  import Banner from "./_components/banner.svelte";
+  import Breadcrumb from './_components/breadcrumb.svelte'; // move to lib
 </script>
 <div class="min-h-screen bg-zinc-900">
   <TopBar />
@@ -18,6 +19,9 @@
 
       <!-- Content Right (Yield Page Slot)-->
       <div class="lg:col-span-4 lg:border-l lg:border-zinc-800 lg:pb-16 lg:pl-8">
+        <Breadcrumb/>
+        <Banner/>
+
         <slot/>
 
       </div>
