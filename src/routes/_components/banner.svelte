@@ -21,9 +21,7 @@
             <span class="hidden md:inline">Big news! Excited to announce the demo of our SvelteKit Dashboard.</span>
           </p>
         </div>
-        <div class="order-3 mt-2 w-full flex-shrink-0 sm:order-2 sm:mt-0 sm:w-auto">
-          <button type="button" class="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-sm font-medium text-indigo-600 shadow-sm hover:bg-indigo-50">Learn more</button>
-        </div>
+    
         <div class="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
           <button type="button" class="-mr-1 flex rounded-md p-2 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2"
           on:click={() => showBanner=false}>
