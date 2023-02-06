@@ -43,7 +43,7 @@ let data = "Data";
             <dt class="text-sm font-medium text-zinc-400"><!--- mini logo -->
                   <div class="relative rounded-full py-1 px-5 text-sm text-center leading-6 text-zinc-300 ring-1 ring-zinc-100/10 hover:ring-zinc-300/20">
                       BTC <div class="font-semibold text-indigo-600">
-                          <span class="absolute inset-0" aria-hidden="true"></span>Bitcoin
+                          Bitcoin
                       </div>
                   </div>
             </dt>
@@ -53,7 +53,7 @@ let data = "Data";
                       + 28.5%
                   </div>
                   <div class="text-center text-zinc-300 font-light mx-auto">
-                      <span class="absolute inset-0" aria-hidden="true"></span>0.3125
+                      0.3125
                   </div>
               </div>
             
@@ -74,7 +74,7 @@ let data = "Data";
             <dt class="text-sm font-medium text-zinc-400"><!--- mini logo -->
                   <div class="relative rounded-full py-1 px-5 text-sm text-center leading-6 text-zinc-300 ring-1 ring-zinc-100/10 hover:ring-zinc-300/20">
                       ETH <div class="font-semibold text-indigo-600">
-                          <span class="absolute inset-0" aria-hidden="true"></span>Ethereum
+                          Ethereum
                       </div>
                   </div>
             </dt>
@@ -84,7 +84,7 @@ let data = "Data";
                       + 35.3%
                   </div>
                   <div class="text-center text-zinc-300 font-light mx-auto">
-                      <span class="absolute inset-0" aria-hidden="true"></span>3.5644
+                      3.5644
                   </div>
               </div>
             
@@ -105,7 +105,7 @@ let data = "Data";
             <dt class="text-sm font-medium text-zinc-400"><!--- mini logo -->
                   <div class="relative rounded-full py-1 px-5 text-sm text-center leading-6 text-zinc-300 ring-1 ring-zinc-100/10 hover:ring-zinc-300/20">
                       BCH <div class="font-semibold text-indigo-600">
-                          <span class="absolute inset-0" aria-hidden="true"></span>Bitcoin Cash
+                          Bitcoin Cash
                       </div>
                   </div>
             </dt>
@@ -115,7 +115,7 @@ let data = "Data";
                       + 23.5%
                   </div>
                   <div class="text-center text-zinc-300 font-light mx-auto">
-                      <span class="absolute inset-0" aria-hidden="true"></span>0.1231
+                      0.1231
                   </div>
               </div>
             
@@ -136,7 +136,7 @@ let data = "Data";
             <dt class="text-sm font-medium text-zinc-400"><!--- mini logo -->
                   <div class="relative rounded-full py-1 px-5 text-sm text-center leading-6 text-zinc-300 ring-1 ring-zinc-100/10 hover:ring-zinc-300/20">
                       USDT <div class="font-semibold text-indigo-600">
-                          <span class="absolute inset-0" aria-hidden="true"></span>Tether
+                          Tether
                       </div>
                   </div>
             </dt>
@@ -146,7 +146,7 @@ let data = "Data";
                       - 0.01%
                   </div>
                   <div class="text-center text-zinc-300 font-light mx-auto">
-                      <span class="absolute inset-0" aria-hidden="true"></span>5643.23
+                      5643.23
                   </div>
               </div>
             
@@ -167,7 +167,7 @@ let data = "Data";
             <dt class="text-sm font-medium text-zinc-400"><!--- mini logo -->
                   <div class="relative rounded-full py-1 px-5 text-sm text-center leading-6 text-zinc-300 ring-1 ring-zinc-100/10 hover:ring-zinc-300/20">
                       LTC <div class="font-semibold text-indigo-600">
-                          <span class="absolute inset-0" aria-hidden="true"></span>LiteCoin
+                          LiteCoin
                       </div>
                   </div>
             </dt>
@@ -177,7 +177,7 @@ let data = "Data";
                       + 54.1%
                   </div>
                   <div class="text-center text-zinc-300 font-light mx-auto">
-                      <span class="absolute inset-0" aria-hidden="true"></span>32.8131
+                      32.8131
                   </div>
               </div>
             
