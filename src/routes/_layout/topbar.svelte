@@ -1,4 +1,5 @@
-<script>
+<script type="ts">
+    import { writable } from "svelte/store";
     import {
       Icon,
       Cake,
@@ -10,6 +11,14 @@
       Cog
     } from "svelte-hero-icons";
     // TODO: Import Tooltip
+
+  </script>
+  <script context="module">
+    export const blurMode = writable(false);
+
+    function toggleBlur() {
+        blurMode.update(n => !n);
+    }
   </script>
 <!-- Top Bar UI Component-->
 <div class="sticky top-0 z-50 bg-zinc-900 p-8 border-b border-zinc-800">
@@ -40,7 +49,8 @@
       </span>
       <!-- Toggle Descrete Mode -->
       <span class="ml-3 hidden sm:block">
-        <button type="button" class="inline-flex items-center rounded-md px-2 py-2 text-sm font-medium text-gray-300 rounded-full bg-zinc-900 p-1 text-zinc-200 hover:text-white hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-600 focus:ring-offset-2 focus:ring-offset-zinc-700">
+        <button type="button" class="inline-flex items-center rounded-md px-2 py-2 text-sm font-medium text-gray-300 rounded-full bg-zinc-900 p-1 text-zinc-200 hover:text-white hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-600 focus:ring-offset-2 focus:ring-offset-zinc-700"
+        on:click={toggleBlur}>
           <!-- Heroicon name: Eye -->
           <Icon src="{Eye}" class="h-5 w-5 flex-shrink-0" aria-hidden="true" />
         </button>

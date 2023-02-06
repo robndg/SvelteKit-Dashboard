@@ -2,6 +2,7 @@
 <script type="ts">
   import { onMount } from 'svelte';
   import { fade, scale } from "svelte/transition";
+  import { blurMode } from "../../_layout/topbar.svelte";
   // Index Page, Portfolio
   import PriceChart from './_components/price-chart.svelte'
   
@@ -103,7 +104,14 @@
       return () => clearInterval(interval);
 
     });
-    
+
+    let blurClass: any;
+
+    onMount(() => {
+      blurMode.subscribe(value => {
+        blurClass = value ? "blur-sm" : "";
+      });
+    });
   </script>
     <div class="p-5 mb-5 rounded-lg bg-zinc-800 sm:flex sm:px-6 flex justify-between">
       <h1 class="text-4xl font-bold tracking-tight text-gray-200">${localPriceToday}</h1>
@@ -118,7 +126,7 @@
       <div class="pt-6 px-3 sm:flex sm:px-6 flex justify-between">
         <div>
           {#if localPriceToday}
-          <h1 class="text-4xl font-bold tracking-tight text-gray-200" in:scale out:fade>${localPriceToday}</h1>
+          <h1 class="text-4xl font-bold tracking-tight text-gray-200" class:blur-sm={blurClass} in:scale out:fade>${localPriceToday}</h1>
           {/if}
           <p class="text-gray-500">total balance</p>
         </div>
