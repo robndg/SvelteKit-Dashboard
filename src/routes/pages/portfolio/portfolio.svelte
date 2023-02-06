@@ -91,7 +91,7 @@
         console.log("Times:", times);
         console.log("Amounts:", amounts);
         console.log("Prices:", pricesData);
-        // For now remove inner html for new chart to draw    
+        // For now remove inner html for new chart to draw (TODO: works with only price-chart html remove)
         const element = document.getElementById("chart-container");
         if(element != null){
           element.innerHTML = "";
