@@ -4,5 +4,5 @@ export const userDefaults = writable({
     theme: 'dark',
     userName: 'Rob',
     userGithubName: 'robndg',
-    defaultCurrency: 'USD'
+    defaultCurrency: 'USD' // GBP
 });

@@ -6,6 +6,7 @@
   import { userDefaults } from '.././userDefaults';
   // userBalances store: Wallet balances
   import { userBalances } from '.././userBalances.js';
+  import { selectedCurrency } from "./slides/settings-slide.svelte";
 
   let defaultCurrency;
 
@@ -20,10 +21,14 @@
     cryptoFull = value.cryptoFull;
     walletBalance = value.walletBalance;
   });
+  let selectedCur: string;
+      selectedCurrency.subscribe(value => {
+        selectedCur = value;
+      });
 
 </script>
 
-<div class="h-96 lg:h-full">
-
-  <Portfolio/>
+<div class="h-full">
+  <!-- TODO: move portfolio.svelte back, or change from +page settings-->
+  <Portfolio selectedCur={selectedCur}/>
 </div>

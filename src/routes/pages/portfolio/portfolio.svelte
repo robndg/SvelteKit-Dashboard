@@ -1,6 +1,7 @@
 
 <script type="ts">
   import { onMount } from 'svelte';
+  import { beforeUpdate, afterUpdate } from 'svelte';
   import { fade, scale } from "svelte/transition";
   import { blurMode } from "../../_layout/topbar.svelte";
   // Index Page, Portfolio
@@ -37,12 +38,16 @@
     let daysToHours: any;
     // Locale Numbers
     let localPriceToday: any;
+    export let selectedCur: string;
 
   onMount(()  => {
+
     async function fetchData() {
-      
+      console.log("SelectedCur")
+      console.log(selectedCur);
+
         // Fetch the historical close price data from the API
-        const resHistoricalClose = await fetch(`https://api.coingecko.com/api/v3/coins/${cryptoFull}/market_chart?vs_currency=${defaultCurrency}&days=${days}&interval=minute`);
+        const resHistoricalClose = await fetch(`https://api.coingecko.com/api/v3/coins/${cryptoFull}/market_chart?vs_currency=${selectedCur}&days=${days}&interval=minute`);
         priceHistory = await resHistoricalClose.json();
         console.log("priceHistory");
 
@@ -102,26 +107,26 @@
       fetchData();
 
       return () => clearInterval(interval);
+  
 
     });
 
-    let blurClass: any;
 
+    let blurClass: any;
+    // Toggle descrete Mode from TopBar
     onMount(() => {
       blurMode.subscribe(value => {
         blurClass = value ? "blur-sm" : "";
       });
     });
+
   </script>
+    <!-- TODO: Add Carousel for latest features
     <div class="p-5 mb-5 rounded-lg bg-zinc-800 sm:flex sm:px-6 flex justify-between">
-      <h1 class="text-4xl font-bold tracking-tight text-gray-200">${localPriceToday}</h1>
-      <div>
-        <button type="button" class="inline-flex w-full justify-center rounded-lg border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-zinc-900 shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Swap</button>
-        <button type="button" class="mt-3 inline-flex w-full justify-center rounded-lg border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-zinc-900 shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Buy</button>
-      </div>
-    </div>
+     
+    </div>-->
  
-  <div class="h-96 rounded-lg bg-zinc-800/70 lg:h-full">
+  <div class="rounded-lg bg-zinc-800/70 h-full">
 
       <div class="pt-6 px-3 sm:flex sm:px-6 flex justify-between">
         <div>
@@ -135,6 +140,6 @@
           <button type="button" class="mt-3 inline-flex w-full justify-center rounded-lg border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-zinc-900 shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Buy</button>
         </div>
       </div>
-
-    <PriceChart defaultCurrency={defaultCurrency} days={days} historyData={historyData} percentageIncrease={percentageIncrease}/>
+      
+    <PriceChart defaultCurrency={selectedCur} days={days} historyData={historyData} percentageIncrease={percentageIncrease}/>
   </div>

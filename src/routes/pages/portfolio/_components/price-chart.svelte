@@ -12,8 +12,8 @@
     userBalances.subscribe(value => {
         cryptoFull = value.cryptoFull;
         walletBalance = value.walletBalance;
-    });
-
+    }); 
+    
     // Default Currency (TODO: add to chart series)
     export let defaultCurrency: string;
 
@@ -145,7 +145,7 @@
             >
             1M
         </button>
-        <button type="button" class="-m-2 ml-4 inline-flex items-center rounded-md {days == 365 ? 'border border-indigo-500' : ''} px-3 py-2 text-sm font-medium text-gray-300 rounded-lg bg-zinc-900 p-1 text-zinc-200 hover:text-white hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-600 focus:ring-offset-2 focus:ring-offset-zinc-700"
+        <button type="button" class="-m-2 ml-4 inline-flex items-center rounded-md {days > 30 ? 'border border-indigo-500' : ''} px-3 py-2 text-sm font-medium text-gray-300 rounded-lg bg-zinc-900 p-1 text-zinc-200 hover:text-white hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-600 focus:ring-offset-2 focus:ring-offset-zinc-700"
             on:click={() => updateDays(365)} 
             >
             1Y
