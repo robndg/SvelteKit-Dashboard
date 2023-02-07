@@ -1,15 +1,16 @@
 <script lang="ts">
     import { fade, slide, fly } from "svelte/transition";
     import { showSettingsSlide } from "../_layout/topbar.svelte";
-    import { onMount } from 'svelte';
+    import { onMount, createEventDispatcher } from 'svelte';
     import {
       Icon,
       ChevronRight
     } from "svelte-hero-icons";
 
     export let open = false;
-    export let onClose = undefined; // TODO: work on transition
     export let toggleOpen;
+
+    const dispatch = createEventDispatcher();
 
    let editing = false
    let isSlidingIn = false;
@@ -29,6 +30,7 @@
             editing = false;
             showSlide = false;
             showSettingsSlide.update(n => !n); // update external settings to fix double click bug
+            dispatch("close");
         }, 200);
     }
 

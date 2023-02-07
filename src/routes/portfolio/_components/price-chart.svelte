@@ -13,9 +13,7 @@
         cryptoFull = value.cryptoFull;
         walletBalance = value.walletBalance;
     }); 
-    
-    // Default Currency (TODO: add to chart series)
-    export let defaultCurrency: string;
+
 
     // Price History
     let pricePrevious;
@@ -54,6 +52,11 @@
             chart.dataArea().background().enabled(false);
             //chart.dataArea().background().fill(['0 #18181b 1', '0.4 #18181b 0'], 90, true);
             chart.background().enabled(false);
+            
+            // set the container where chart will be drawn
+             chart.container("chart-container");
+
+
             // crosshair settings
             var crosshair = chart.crosshair();
             // enable crosshair
@@ -69,8 +72,7 @@
             var xScale = anychart.scales.dateTime();
             chart.xScale(xScale);
 
-            // set the container where chart will be drawn
-            chart.container("chart-container");
+          
             //  draw the chart on the page
             chart.draw();
         });

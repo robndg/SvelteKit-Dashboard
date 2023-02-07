@@ -1,7 +1,6 @@
 
 <script type="ts">
-  import { onMount } from 'svelte';
-  import { beforeUpdate, afterUpdate } from 'svelte';
+  import { onMount, onDestroy, beforeUpdate, afterUpdate } from 'svelte';
   import { fade, scale } from "svelte/transition";
   import { blurMode } from "../_layout/topbar.svelte";
   // Index Page, Portfolio
@@ -12,19 +11,6 @@
   // userBalances store: Wallet balances
   import { userBalances } from '../../userBalances.js';
 
-  let defaultCurrency: string;
-
-  userDefaults.subscribe(value => {
-    defaultCurrency = value.defaultCurrency;
-  });
-
-  let cryptoFull: string;
-  let walletBalance: number;
-
-  userBalances.subscribe(value => {
-    cryptoFull = value.cryptoFull;
-    walletBalance = value.walletBalance;
-  });
   
     let days = 80;
     // Price History
@@ -38,16 +24,15 @@
     let daysToHours: any;
     // Locale Numbers
     let localPriceToday: any;
-    export let selectedCur: string;
 
-  onMount(()  => {
+    let triggerRender:boolean = false;
 
     async function fetchData() {
       console.log("SelectedCur")
-      console.log(selectedCur);
+      console.log($userDefaults.defaultCurrency);
 
         // Fetch the historical close price data from the API
-        const resHistoricalClose = await fetch(`https://api.coingecko.com/api/v3/coins/${cryptoFull}/market_chart?vs_currency=${selectedCur}&days=${days}&interval=minute`);
+        const resHistoricalClose = await fetch(`https://api.coingecko.com/api/v3/coins/${$userBalances.cryptoFull}/market_chart?vs_currency=${$userDefaults.defaultCurrency}&days=${days}&interval=minute`);
         priceHistory = await resHistoricalClose.json();
         console.log("priceHistory");
 
@@ -66,7 +51,7 @@
         //console.log(new Date(priceHistory.prices[daysToHours][0]).toString())
         //console.log(priceHistory.prices[daysToHours][1]);
 
-        localPriceToday = (priceToday.toLocaleString("en-US"));
+        localPriceToday = new Intl.NumberFormat('en-US', { style: 'currency', currency: $userDefaults.defaultCurrency }).format(priceToday);
 
         // Convert the prices to floating point numbers for calculation
         let today = parseFloat(priceToday);
@@ -74,9 +59,9 @@
 
         // Calculate the increase in price as a percentage (TODO: include changes inclusive of balance)
         let increase = (today - previous) / previous;
-        let valueIncrease = walletBalance * increase;
+        let valueIncrease = $userBalances.walletBalance * increase;
 
-        percentageIncrease = (valueIncrease / walletBalance * 100).toFixed(2);
+        percentageIncrease = (valueIncrease / $userBalances.walletBalance * 100).toFixed(2);
 
         // Prop Pass Data to child PriceChart export
         // Init Array
@@ -102,23 +87,36 @@
         if(element != null){
           element.innerHTML = "";
         }
+
+        triggerRender != triggerRender;
       } // end async function fetch data
-      const interval = setInterval(fetchData, 360000);
-      fetchData();
-
-      return () => clearInterval(interval);
   
+    let currency = $userDefaults.defaultCurrency;
 
-    });
+    userDefaults.subscribe((conf) => {
+      if (conf.defaultCurrency !== currency) {
+        currency = conf.defaultCurrency;
+        fetchData();
+      }
+    })
 
-
+    let interval: any = undefined;
     let blurClass: any;
-    // Toggle descrete Mode from TopBar
+
     onMount(() => {
+      fetchData()
+      interval = setInterval(() => {
+          fetchData();
+      }, 1000 * 30)
+
       blurMode.subscribe(value => {
         blurClass = value ? "blur-sm" : "";
       });
     });
+
+    onDestroy(() => {
+      clearInterval(interval);
+    })
 
   </script>
     <!-- TODO: Add Carousel for latest features
@@ -126,12 +124,13 @@
      
     </div>-->
  
+  {#key triggerRender}
   <div class="rounded-lg bg-zinc-800/70 h-full">
 
       <div class="pt-6 px-3 sm:flex sm:px-6 flex justify-between">
         <div>
           {#if localPriceToday}
-          <h1 class="text-4xl font-bold tracking-tight text-gray-200" class:blur-sm={blurClass} in:scale out:fade>${localPriceToday}</h1>
+          <h1 class="text-4xl font-bold tracking-tight text-gray-200" class:blur-sm={blurClass} in:scale out:fade>{localPriceToday}</h1>
           {/if}
           <p class="text-gray-500">total balance</p>
         </div>
@@ -141,5 +140,7 @@
         </div>
       </div>
       
-    <PriceChart defaultCurrency={selectedCur} days={days} historyData={historyData} percentageIncrease={percentageIncrease}/>
+    
+    <PriceChart days={days} historyData={historyData} percentageIncrease={percentageIncrease}/>
   </div>
+  {/key}
