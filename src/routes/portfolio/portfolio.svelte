@@ -107,7 +107,7 @@
       fetchData()
       interval = setInterval(() => {
           fetchData();
-      }, 1000 * 30)
+      }, 1000 * 60 * 5) // Fetch history data 5min (avoid rate limit)
 
       blurMode.subscribe(value => {
         blurClass = value ? "blur-sm" : "";
