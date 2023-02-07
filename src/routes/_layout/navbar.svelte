@@ -21,7 +21,7 @@
     let nav_list = [
         ['/', 'Portfolio', PresentationChartLine, false, false],
         ['/market', 'Market', ChartBar, false, false],
-        ['/accounts', 'Accounts', ViewList, false, false],
+        ['/transactions', 'Transactions', ViewList, false, false],
         //['/discover', 'Discover', CheckCircle, true, false],
         ['/send', 'Send', ArrowUp, true, false],
         ['/receive', 'Receive', ArrowDown, true, false],

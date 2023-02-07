@@ -5,7 +5,7 @@
     let nav_list = [
         ['/', 'Portfolio'],
         ['/market', 'Market'],
-        ['/accounts', 'Accounts'],
+        ['/transactions', 'Transactions'],
         ['/discover', 'Discover'],
         ['/send', 'Send'],
         ['/receive', 'Receive'],
