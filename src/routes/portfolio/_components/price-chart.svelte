@@ -22,7 +22,7 @@
     export let percentageIncrease: any;
 
     /* Page Data */
-    export let days = 30; // TimeFrame
+    export let days:number; // TimeFrame
     let daysToHours: any;
     export let historyData: Array<[number, string]>; // Time vs (Amount + TODO: add balance %)
     

@@ -1,9 +1,12 @@
-<script>
+<script type="ts">
  import 'anychart';
  import { onMount } from 'svelte';
+ import { fade, scale } from "svelte/transition";
  import LineChart from './components/line-chart.svelte';
 
- onMount(() => {
+let triggerRender:boolean = false;
+
+onMount(() => {
 
     // create a pie chart: Wallet Portfolio Share reference
     var chart = anychart.pie([
@@ -23,12 +26,16 @@
     // initiate chart drawing
     chart.draw();
 
+    triggerRender != triggerRender;
+
 });
 
-let data = "Data";
+let data = undefined;
 
 </script>
-<div id="pie-container" style="width: 100%; height: 300px;"></div>
+{#key triggerRender}
+<div id="pie-container" style="width: 100%; height: 300px;" in:fade></div>
+{/key}
 <!-- Wallet top earning coins + balances
     TODO: fetch coin prices, add and update coin balances from userBalances,
     tick every minute or balance onchange (receive hook, swap finish, buy completes) -->

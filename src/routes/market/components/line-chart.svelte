@@ -4,6 +4,7 @@
 
     export let data: any;
     export let dataTitle: string;
+    let triggerRender:boolean = false;
 
     onMount(() => {
         // check data
@@ -29,8 +30,10 @@
 
             // initiate drawing the chart
             chart.draw();
+            triggerRender != triggerRender;
         }
     });
 </script>
-
+{#key triggerRender}
 <div id="container-{dataTitle}" style="width: 100%; height: 75px;"></div>
+{/key}
