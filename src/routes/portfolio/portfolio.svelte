@@ -53,79 +53,81 @@
           console.log('fetching!')
           fetching = true;
           // Fetch the historical close price data from the API
-          const resHistoricalClose = await self.fetch(`https://api.coingecko.com/api/v3/coins/${$userBalances.cryptoFull}/market_chart?vs_currency=${$userDefaults.defaultCurrency}&days=${days}&interval=minute`);
+          try{
+            const resHistoricalClose = await self.fetch(`https://api.coingecko.com/api/v3/coins/${$userBalances.cryptoFull}/market_chart?vs_currency=${$userDefaults.defaultCurrency}&days=${days}&interval=minute`);
 
-          if (resHistoricalClose.ok) {
-            priceHistory = await resHistoricalClose.json();
-   
-            console.log("priceHistory");
+            if (resHistoricalClose.ok) {
+              priceHistory = await resHistoricalClose.json();
+    
+              console.log("priceHistory");
 
-            console.log(priceHistory);
+              console.log(priceHistory);
 
-            console.log(days);
-            // Calculate the number of hours that correspond to the number of days specified
-            daysToHours = (days * 24) - 1;
-            console.log(daysToHours);
-            // Get the price from the specified number of days ago
-            pricePrevious = priceHistory.prices[daysToHours - 1][1];
-            //console.log(pricePrevious);
+              console.log(days);
+              // Calculate the number of hours that correspond to the number of days specified
+              daysToHours = (days * 24) - 1;
+              console.log(daysToHours);
+              // Get the price from the specified number of days ago
+              pricePrevious = priceHistory.prices[daysToHours - 1][1];
+              //console.log(pricePrevious);
 
-            // Get the current price
-            priceToday = (priceHistory.prices[daysToHours][1])
-            //console.log(new Date(priceHistory.prices[daysToHours][0]).toString())
-            //console.log(priceHistory.prices[daysToHours][1]);
+              // Get the current price
+              priceToday = (priceHistory.prices[daysToHours][1])
+              //console.log(new Date(priceHistory.prices[daysToHours][0]).toString())
+              //console.log(priceHistory.prices[daysToHours][1]);
 
-            localPriceToday = new Intl.NumberFormat('en-US', { style: 'currency', currency: $userDefaults.defaultCurrency }).format(priceToday);
+              localPriceToday = new Intl.NumberFormat('en-US', { style: 'currency', currency: $userDefaults.defaultCurrency }).format(priceToday);
 
-            // Convert the prices to floating point numbers for calculation
-            let today = parseFloat(priceToday);
-            let previous = parseFloat(pricePrevious);
+              // Convert the prices to floating point numbers for calculation
+              let today = parseFloat(priceToday);
+              let previous = parseFloat(pricePrevious);
 
-            // Calculate the increase in price as a percentage (TODO: include changes inclusive of balance)
-            let increase = (today - previous) / previous;
-            let valueIncrease = $userBalances.walletBalance * increase;
+              // Calculate the increase in price as a percentage (TODO: include changes inclusive of balance)
+              let increase = (today - previous) / previous;
+              let valueIncrease = $userBalances.walletBalance * increase;
 
-            percentageIncrease = (valueIncrease / $userBalances.walletBalance * 100).toFixed(2);
+              percentageIncrease = (valueIncrease / $userBalances.walletBalance * 100).toFixed(2);
 
-            // Prop Pass Data to child PriceChart export
-            // Init Array
-            let pricesData: Array<[number, string]> = priceHistory["prices"];
-            let times: string[] = [];
-            let amounts: string[] = [];
-            console.log("Portfolio days, daysToHours:")
-            daysToHours = (days * 24) - 1;
-            console.log(days);
-            console.log(daysToHours);
-            for (let [time, price] of pricesData/*.slice(0, daysToHours)*/) {
-                times.push(time);
-                amounts.push(price);
-            //historyData = pricesData;
-            }
-            historyData = pricesData.reverse();
+              // Prop Pass Data to child PriceChart export
+              // Init Array
+              let pricesData: Array<[number, string]> = priceHistory["prices"];
+              let times: string[] = [];
+              let amounts: string[] = [];
+              console.log("Portfolio days, daysToHours:")
+              daysToHours = (days * 24) - 1;
+              console.log(days);
+              console.log(daysToHours);
+              for (let [time, price] of pricesData/*.slice(0, daysToHours)*/) {
+                  times.push(time);
+                  amounts.push(price);
+              //historyData = pricesData;
+              }
+              historyData = pricesData.reverse();
 
-            console.log("Times:", times);
-            console.log("Amounts:", amounts);
-            console.log("Prices:", pricesData);
-            // For now remove inner html for new chart to draw (TODO: works with only price-chart html remove)
-            const element = document.getElementById("chart-container");
-            if(element != null){
-              element.innerHTML = "";
-            }
+              console.log("Times:", times);
+              console.log("Amounts:", amounts);
+              console.log("Prices:", pricesData);
+              // For now remove inner html for new chart to draw (TODO: works with only price-chart html remove)
+              const element = document.getElementById("chart-container");
+              if(element != null){
+                element.innerHTML = "";
+              }
 
-            triggerRender != triggerRender;
-            fetchCount += 1;
-            fetching = false;
-           /* triggerError = true;
-            triggerSlowdown = true;
-            errorTitle = "Slowdown"
-            errorMessage = "You're moving too fast for us. Try again?";*/
-          } else {
-              triggerError = true;
+              triggerRender != triggerRender;
+              fetchCount += 1;
+              fetching = false;
+            /* triggerError = true;
               triggerSlowdown = true;
-              console.log('triggerSlowdown update', triggerSlowdown);
               errorTitle = "Slowdown"
-              errorMessage = "You're moving too fast for us. Try again?";
+              errorMessage = "You're moving too fast for us. Try again?";*/
+              
+            } else {
+              setSlowdown()
               throw new Error();
+            }
+          }catch (error){
+            setSlowdown()
+            throw new Error();
           }
         }
         console.log(fetchCount);
@@ -139,6 +141,14 @@
         fetchData();
       }
     })
+
+    const setSlowdown = () => {
+      triggerError = true;
+      triggerSlowdown = true;
+      console.log('triggerSlowdown update', triggerSlowdown);
+      errorTitle = "Slowdown"
+      errorMessage = "You're moving too fast for us. Try again?";
+    }
 
     let interval: any = undefined;
     let blurClass: any;
@@ -159,26 +169,77 @@
       blurMode.subscribe(value => {
         blurClass = value ? "blur-sm" : "";
       });
+     // startCheckingIdle // idle
     });
 
-    onDestroy(() => {
-      clearInterval(interval);
-    })
+    // idle on inactivity TODO: get user/team feedback if should automatic Reset
+    let idle = false;
+    let lastInteraction = Date.now();
+    let interactionCount = 1000 * 60 * 5; // idle after 5 mins
+    let throttleInterval = 200;
 
+    // Popup reset to start fetch
     function resetTriggerOK(){
       console.log("Trigger Reset")
       triggerInactivity = false;
       triggerSlowdown = false;
       triggerError = false;
       fetching = false;
+      idle = false;
+      startCheckingIdle
       fetchData();
     }
+  
+    const setIdle = () => {
+      if (!idle) {
+        console.log("idling");
+        idle = true;
+        triggerError = true;
+        triggerInactivity = true;
+        errorTitle = "Idling"
+        errorMessage = "You may be inactive, when you're back we'll refresh charts."
+      }
+    };
 
+    const resetIdle = () => {
+      idle = false;
+      lastInteraction = Date.now();
+      
+      if(triggerInactivity == true){
+        resetTriggerOK()
+      }
+    };
+
+    let intervalId: any;
+    const startCheckingIdle = () => { 
+      console.log('startCheckingIdle')
+      intervalId = setInterval(() => {
+        if (Date.now() - lastInteraction >= interactionCount) {
+          if(!idle){
+            setIdle();
+            console.log('setIdle')
+          }else{
+            clearInterval(intervalId)
+          }
+        }
+      }, throttleInterval); 
+    };
+
+    onDestroy(() => {
+      clearInterval(interval); // fetch
+      clearInterval(intervalId); // idle 
+    });
+
+    onMount(startCheckingIdle);
   </script>
     <!-- TODO: Add Carousel for latest features
     <div class="p-5 mb-5 rounded-lg bg-zinc-800 sm:flex sm:px-6 flex justify-between">
      
     </div>-->
+
+ 
+  <svelte:body on:mousemove={resetIdle} on:mouseenter={resetIdle} on:mouseleave={setIdle} on:touchend={resetIdle} />
+
 
   <Alert title='{errorTitle}' show={triggerError} >
     <div class="bg-zinc-900/70 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -201,9 +262,6 @@
     </div>
   </Alert>
 
- 
-
- 
   {#key triggerRender}
   <div class="rounded-lg bg-zinc-800/70 h-full">
 
@@ -219,7 +277,7 @@
           <button type="button" class="mt-3 inline-flex w-full justify-center rounded-lg border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-zinc-900 shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Buy</button>
         </div>
       </div>
-      
+    
     <PriceChart days={days} historyData={historyData} percentageIncrease={percentageIncrease}/>
   </div>
   {/key}

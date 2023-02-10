@@ -12,7 +12,7 @@
     let open = false;
     let editing = false;
 
-    const availableCurrencies = ['USD', 'EUR', 'GBP'];
+    const availableCurrencies = ['USD', 'CAD', 'EUR', 'GBP', 'AUD', 'JPY'];
 
 </script>
 
